@@ -1,0 +1,56 @@
+repos:
+  # ── General file hygiene ──────────────────────────────────
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-json
+      - id: check-toml
+      - id: check-merge-conflict
+      - id: check-added-large-files
+        args: ["--maxkb=1024"]
+      - id: mixed-line-ending
+        args: ["--fix=lf"]
+
+  # ── Python: Ruff lint + format ─────────────────────────────
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.8.6
+    hooks:
+      - id: ruff
+        args: ["--fix", "--exit-non-zero-on-fix"]
+        files: ^backend/
+      - id: ruff-format
+        files: ^backend/
+
+  # ── Python: Mypy type-check ────────────────────────────────
+  - repo: local
+    hooks:
+      - id: mypy
+        name: mypy
+        entry: bash -c 'cd backend && python -m mypy app/'
+        language: system
+        types: [python]
+        pass_filenames: false
+        files: ^backend/app/
+
+  # ── Frontend: ESLint ───────────────────────────────────────
+  - repo: local
+    hooks:
+      - id: eslint
+        name: ESLint (frontend)
+        entry: bash -c 'cd frontend && npm run lint'
+        language: system
+        files: ^frontend/src/.*\.[jt]sx?$
+        pass_filenames: false
+
+  # ── Frontend: TypeScript ───────────────────────────────────
+  - repo: local
+    hooks:
+      - id: tsc
+        name: TypeScript check (frontend)
+        entry: bash -c 'cd frontend && npm run type-check'
+        language: system
+        files: ^frontend/src/.*\.tsx?$
+        pass_filenames: false

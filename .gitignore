@@ -1,0 +1,58 @@
+# ── Environment files ──────────────────────────────────────
+.env
+.env.local
+.env.*.local
+backend/.env
+frontend/.env.local
+
+# ── Python ─────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+.eggs/
+.venv/
+venv/
+env/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+htmlcov/
+.coverage
+coverage.xml
+*.cover
+
+# ── Node / Next.js ─────────────────────────────────────────
+node_modules/
+.next/
+out/
+.npm
+.yarn-integrity
+*.tsbuildinfo
+next-env.d.ts
+
+# ── Docker ─────────────────────────────────────────────────
+.docker/
+
+# ── OS ─────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── IDE ────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ── Logs ───────────────────────────────────────────────────
+*.log
+logs/
+
+# ── Alembic ────────────────────────────────────────────────
+# Keep versions directory but ignore pyc inside it
+backend/alembic/versions/__pycache__/
