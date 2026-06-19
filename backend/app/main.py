@@ -14,6 +14,7 @@ from app.core.rate_limit import limiter
 from app.db.session import init_db
 from app.exceptions.handlers import register_exception_handlers
 from app.middleware.logging import LoggingMiddleware
+from app.middleware.security import SecurityHeadersMiddleware
 from app.services.redis_service import redis_service
 from slowapi.errors import RateLimitExceeded
 from slowapi.middleware import SlowAPIMiddleware
@@ -62,6 +63,7 @@ def create_application() -> FastAPI:
     app.state.limiter = limiter
     app.add_middleware(SlowAPIMiddleware)
     app.add_middleware(LoggingMiddleware)
+    app.add_middleware(SecurityHeadersMiddleware)
 
     # ── Exception handlers ───────────────────────────────────
     register_exception_handlers(app)
